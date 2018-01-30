@@ -110,7 +110,7 @@ EOF
 
 #Set defaults
 pipeline_port="8000"
-artifacts_location="https://raw.githubusercontent.com/agnnn/azure-spinnaker/master/"
+artifacts_location="https://raw.githubusercontent.com/agnnn/azure-spinnaker/"
 docker_repository="${vm_user_name}/myfirstapp"
 
 while [[ $# > 0 ]]
@@ -251,15 +251,6 @@ hal deploy apply
 
 # Automatically connect to Spinnaker when logging in to DevOps VM
 add_bash_login
-
-# Add Kubernetes pipeline
-run_util_script "spinnaker/add_k8s_pipeline/add_k8s_pipeline.sh" \
-  -an "$acr_account" \
-  -rg "$azure_container_registry" \
-  -rp "$docker_repository" \
-  -p "$pipeline_port" \
-  -al "$artifacts_location" \
-  -st "$artifacts_location_sas_token"
 
 run_util_script "quickstart_template/201-jenkins-acr.sh" -u "$user_name" \
   -g "$git_repository" \

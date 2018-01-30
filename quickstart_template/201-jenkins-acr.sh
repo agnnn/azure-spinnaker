@@ -39,7 +39,7 @@ function run_util_script() {
 }
 
 #defaults
-artifacts_location="https://raw.githubusercontent.com/agnnn/azure-spinnaker/master/"
+artifacts_location="https://raw.githubusercontent.com/agnnn/azure-spinnaker/"
 while [[ $# > 0 ]]
 do
   key="$1"
