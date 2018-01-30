@@ -30,7 +30,7 @@ function throw_if_empty() {
 # Set defaults
 port="8000"
 user_name="[anonymous]"
-user_email="anonymous@Fabrikam.com"
+user_email="ravindran@pythian.com"
 artifacts_location="https://raw.githubusercontent.com/Azure/azure-devops-utils/master/"
 
 while [[ $# > 0 ]]
