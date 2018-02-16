@@ -2,7 +2,6 @@
 
 function print_usage() {
   cat <<EOF
-https://github.com/Azure/azure-quickstart-templates/tree/master/301-jenkins-acr-spinnaker-k8s
 Command
   $0
 Arguments
@@ -261,7 +260,8 @@ run_util_script "spinnaker/add_k8s_pipeline/add_k8s_pipeline.sh" \
   -al "$artifacts_location" \
   -st "$artifacts_location_sas_token"
 
-run_util_script "quickstart_template/201-jenkins-acr.sh" -u "$user_name" \
+# Install Jenkins on acr
+run_util_script "quickstart_template/jenkins-acr.sh" -u "$user_name" \
   -g "$git_repository" \
   -r "https://$azure_container_registry" \
   -ru "$app_id" \
