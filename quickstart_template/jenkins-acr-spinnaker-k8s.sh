@@ -224,7 +224,7 @@ az logout
 docker_hub_account="docker-hub-registry"
 hal config provider docker-registry account add $docker_hub_account \
   --address "https://index.docker.io/" \
-  --repositories "library/nginx" "library/redis" "library/ubuntu" # Spinnaker can't get the entire catalog for a public registry, so we have to list a few repos
+  --repositories "library/nginx" "library/ubuntu" # Spinnaker can't get the entire catalog for a public registry, so we have to list a few repos
 acr_account="azure-container-registry"
 echo "$app_key" | hal config provider docker-registry account add $acr_account \
   --address "https://$azure_container_registry/" \
@@ -244,21 +244,12 @@ hal config provider kubernetes enable
 # Deploy Spinnaker to the Kubernetes cluster
 hal config deploy edit --account-name $my_kubernetes_account --type distributed
 
-# Enable pipeline template feature flag
+# Enable pipeline template feature flag here
 hal config features edit --pipeline-templates true
 hal deploy apply
 
-# Automatically connect to Spinnaker when logging in to DevOps VM
+# Automatically connect to Spinnaker when logging in to VM
 add_bash_login
-
-# Add Kubernetes pipeline
-run_util_script "spinnaker/add_k8s_pipeline/add_k8s_pipeline.sh" \
-  -an "$acr_account" \
-  -rg "$azure_container_registry" \
-  -rp "$docker_repository" \
-  -p "$pipeline_port" \
-  -al "$artifacts_location" \
-  -st "$artifacts_location_sas_token"
 
 # Install Jenkins on acr
 run_util_script "quickstart_template/jenkins-acr.sh" -u "$user_name" \
